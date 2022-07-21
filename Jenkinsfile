@@ -12,14 +12,16 @@ pipeline {
     }
        
     stage('Build image') {
-      dockerImage = docker.build("cheplorna/lorna:${env.BUILD_ID}")
+      steps{
+         dockerImage = docker.build("cheplorna/lorna:${env.BUILD_ID}")
   }
-
+}
     stage('Push image') {
-      docker.withRegistry('https://registry.hub.docker.com/', 'dockerHub') {
-        dockerImage.push()
+      steps{
+         docker.withRegistry('https://registry.hub.docker.com/', 'dockerHub') {
+            dockerImage.push()
+     }
     }
   }
-       
-  }
+}
 }
