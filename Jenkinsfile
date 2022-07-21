@@ -10,18 +10,11 @@ pipeline {
         git 'https://github.com/chepkoechlorna/devops_test.git'
       }
     }
-     
-    stage('Build') {
-      steps {
-        sh 'npm install'
-         sh '<<Build Command>>'
-      }
-    }  
-    
+       
             
-    stage('Test') {
+    stage('Run') {
       steps {
-        sh 'node test'
+        sh 'node index.js'
       }
     }
   }
