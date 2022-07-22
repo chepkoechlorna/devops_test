@@ -34,5 +34,14 @@ pipeline {
         }
       }
     }
+   
+     stage('Orchestrate'){
+       steps{
+         script{
+           sh 'kubectl apply -f test.yml'
 }
+}
+}
+}
+
 }
