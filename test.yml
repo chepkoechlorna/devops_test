@@ -21,3 +21,36 @@ spec:
                  - name: web
                  containerPort: 3000
                  protocol: tcp
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-service
+  labels:
+    name: test
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      nodePort: 30036
+      name: http
+  selector:
+    name: test
+
+---
+kind: Ingress
+metadata:
+  name: test-ingress
+spec:
+  rules:
+  - host: test 
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: test-service
+            port:
+              number: 80
